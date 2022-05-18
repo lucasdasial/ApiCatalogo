@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CatalogApi.Domain
 {
@@ -30,6 +31,7 @@ namespace CatalogApi.Domain
 
         public int CategoriaId { get; set; }
 
+        [JsonIgnore]
         public Categoria? Categoria { get; set; }
     }
 }

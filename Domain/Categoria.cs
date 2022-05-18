@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CatalogApi.Domain
 {
@@ -20,6 +21,7 @@ namespace CatalogApi.Domain
         [MaxLength(300)]
         public string? ImageUrl { get; set; }
 
+        [JsonIgnore]
         public ICollection<Produto>? Produtos { get; set; }
     }
 }

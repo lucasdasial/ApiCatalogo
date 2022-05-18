@@ -21,7 +21,10 @@ namespace CatalogApi.Controllers
         public ActionResult<IEnumerable<Produto>> Get()
         {
             //retornando os produtos do banco -- 'contexto'
-            var produtos = _context.Produtos.ToList();
+
+
+            //nunca retornar todos os items -- take limitar o num de items
+            var produtos = _context.Produtos.Take(5).AsNoTracking().ToList();
 
             if (produtos is null)
             {

@@ -16,11 +16,13 @@ namespace CatalogApi.Controllers
             _context = context;
         }
 
+
+
         [HttpGet("produtos")]
         public ActionResult<IEnumerable<Categoria>> GetCategoriaProdutos()
         {
 
-            //nunca fazersem um filtro
+            //nunca fazer sem um filtro
             // return _context.Categorias.Include(p => p.Produtos).AsNoTracking().ToList();
             return _context.Categorias.Include(p => p.Produtos).Where(c => c.CategoriaId <= 5).ToList();
         }
@@ -28,9 +30,21 @@ namespace CatalogApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            return _context.Categorias.AsNoTracking().ToList();
-        }
 
+            try
+            {
+                // throw new DataMisalignedException();
+                return _context.Categorias.AsNoTracking().ToList();
+
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um problema ao tratar sua solicitação");
+
+            }
+
+        }
 
         [HttpGet("id:int", Name = "ObterCategoria")]
         public ActionResult<Categoria> Get(int id)
